@@ -20,9 +20,29 @@ public class Taco extends Food{
         toppings.add(t);
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public String getShellType() {
+        return shellType;
+    }
+
+    public boolean isDeepFried() {
+        return deepFried;
+    }
+
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+
+    public void setDeepFried(boolean deepFried) {
+        this.deepFried = deepFried;
+    }
+
     @Override
     public double calculatePrice() {
-        return 0;
+        // base price + size + shell + toppings + deepfried
     }
 
 
