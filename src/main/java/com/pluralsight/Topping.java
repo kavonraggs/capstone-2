@@ -7,46 +7,25 @@ public class Topping {
 
     public double getPrice(String category, String size){
         double price = 0;
-        if (this.category.equalsIgnoreCase("meat")){
-            if (size.equalsIgnoreCase("single")){
-                price = 1;
-                if (extra){
-                    price += .50;
+
+        switch (category.toLowerCase()){
+            case "meat" -> {
+                switch (size.toLowerCase()){
+                    case "single" -> price = 1 + (extra ? 0.5 : 0);
+                    case "3 tacos" -> price = 2 + (extra ? 1 : 0);
+                    case "burrito" -> price = 3 + (extra ? 1.50 : 0);
                 }
             }
-            else if (size.equalsIgnoreCase("3 tacos")) {
-                price = 2;
-                if (extra){
-                    price += 1;
+            case "cheese" -> {
+                switch (size.toLowerCase()){
+                    case "single" -> price = 0.75 + (extra ? 0.30 : 0);
+                    case "3 tacos" -> price = 1.50 + (extra ? 0.60 : 0);
+                    case "burrito" -> price = 2.25 + (extra ? 0.90 : 0);
                 }
             }
-            else if (size.equalsIgnoreCase("burrito")){
-                price = 3;
-                if (extra){
-                    price += 1.50;
-                }
-            }
+
         }
-        else if (category.equalsIgnoreCase("cheese")){
-            if (size.equalsIgnoreCase("single")){
-                price = 0.75;
-                if (extra){
-                    price += .30;
-                }
-            }
-            else if (size.equalsIgnoreCase("3 tacos")) {
-                price = 1.50;
-                if (extra){
-                    price += .60;
-                }
-            }
-            else if (size.equalsIgnoreCase("burrito")){
-                price = 2.25;
-                if (extra){
-                    price += .90;
-                }
-            }
-        }
+
         return price;
     }
 

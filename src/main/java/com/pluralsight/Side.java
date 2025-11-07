@@ -1,11 +1,12 @@
 package com.pluralsight;
 
 public class Side extends Food{
-    private String salsaType;
 
-    public Side(String name, double basePrice) {
-        super(name, basePrice);
+    public Side(double price) {
+        super(price);
+        price = 1.50;
     }
+
 
     @Override
     public double calculatePrice() {

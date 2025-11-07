@@ -8,12 +8,11 @@ public class Taco extends Food{
     private boolean deepFried;
     List<Topping> toppings;
 
-    public Taco(String name, double basePrice, String size, String shellType, boolean deepFried, List<Topping> toppings) {
-        super(name, basePrice);
+    public Taco(String name, String size, String shellType, boolean deepFried) {
+        super(name);
         this.size = size;
         this.shellType = shellType;
         this.deepFried = deepFried;
-        this.toppings = toppings;
     }
 
     public void addTopping(Topping t){
@@ -40,10 +39,16 @@ public class Taco extends Food{
         this.deepFried = deepFried;
     }
 
+
     @Override
-    public double calculatePrice() {
-        // base price + size + shell + toppings + deepfried
+    public double getPrice() {
+        double price = 0;
+
+        switch (size.toLowerCase()){
+            case "single" -> price = 3.5;
+            case "3 tacos" -> price = 9.0;
+            case "burrito" -> price = 8.50;
+        }
+        return price;
     }
-
-
 }
