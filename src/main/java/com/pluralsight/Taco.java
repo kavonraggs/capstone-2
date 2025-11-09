@@ -1,12 +1,13 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Taco extends Food{
     private String size;
     private String shellType;
     private boolean deepFried;
-    List<Topping> toppings;
+    List<Topping> toppings = new ArrayList<>();
 
     public Taco(String name, String size, String shellType, boolean deepFried) {
         super(name);
@@ -48,6 +49,12 @@ public class Taco extends Food{
             case "single" -> price = 3.5;
             case "3 tacos" -> price = 9.0;
             case "burrito" -> price = 8.50;
+        }
+        for (Topping t: toppings){
+            price += t.getPrice(t.getCategory(), size);
+        }
+        if (deepFried){
+            price += 1;
         }
         return price;
     }

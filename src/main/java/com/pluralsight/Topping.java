@@ -5,6 +5,12 @@ public class Topping {
     private String category;
     private boolean extra;
 
+    public Topping(String name, String category){
+        this.name = name;
+        this.category = category;
+        this.extra = false;
+    }
+
     public double getPrice(String category, String size){
         double price = 0;
 
@@ -25,12 +31,10 @@ public class Topping {
             }
 
         }
-
         return price;
     }
 
-
-
-
-
+    public String getCategory() {
+        return category;
+    }
 }
