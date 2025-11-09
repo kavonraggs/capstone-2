@@ -58,4 +58,27 @@ public class Taco extends Food{
         }
         return price;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%s (%s)\n", getName(), getSize()));
+        sb.append(String.format(" -Shell Type: %s\n", getShellType()));
+        sb.append(String.format(" - Deep Fried: %s\n", isDeepFried()));
+        sb.append(" - Toppings:\n");
+
+        if (toppings.isEmpty()){
+            sb.append(" (no toppings)\n");
+        } else {
+            for (Topping t: toppings){
+                sb.append(String.format(" -%s", t.getName()));
+            }
+        }
+        sb.append(String.format(" @ $%.2f", getPrice()));
+
+        return "Taco (" + size + ")" +
+                "\n - Deep Fried: " + deepFried +
+                "\n - Toppings: " + toppings + "@ $" + getPrice();
+
+    }
 }

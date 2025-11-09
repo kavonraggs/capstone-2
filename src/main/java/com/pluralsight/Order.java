@@ -1,11 +1,13 @@
 package com.pluralsight;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
     private LocalDateTime orderTime;
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
     private List<Food> items = new ArrayList<>();
 
 
@@ -28,7 +30,7 @@ public class Order {
     public String getReceipt(){
         StringBuilder receipt = new StringBuilder();
         receipt.append("Taco The Town\n");
-        receipt.append("Date: ").append(orderTime).append("\n");
+        receipt.append("Date: ").append(orderTime.format(fmt)).append("\n");
         receipt.append("---------------------------------\n");
 
         for (Food item: items){

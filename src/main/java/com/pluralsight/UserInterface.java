@@ -60,7 +60,6 @@ public class UserInterface {
     public void addTaco() {
         Taco taco = createTaco();
 
-        sizeMenu();
          if (taco.getSize().equalsIgnoreCase("3 tacos")) {
              for (int i = 1; i <= 3; i++) {
                  System.out.println("Customizing taco #" + i);
@@ -95,12 +94,15 @@ public class UserInterface {
     public Taco createTaco(){
         String name;
         String shellType = "flour";
+        sizeMenu();
         String size = getInput("Select an option:");
+
         switch (size) {
             case "2" -> size = "3 tacos";
-            case "3" -> size = "burrito";
-            default -> size = "single";
+            case "3" -> size = "Burrito";
+            default -> size = "Single";
         }
+
 
         if (size.equalsIgnoreCase("burrito")){
             name = "Burrito";
@@ -135,16 +137,16 @@ public class UserInterface {
        String flavor = getInput("What flavor drink would you like? ");
 
        switch (flavor){
-           case "1" -> flavor = "strawberry";
-           case "2" ->  flavor = "orange";
-           case "3" -> flavor = "lemon";
+           case "1" -> flavor = "Strawberry";
+           case "2" ->  flavor = "Orange";
+           case "3" -> flavor = "Lemon";
        }
         Drink drink = new Drink("Drink", size.toLowerCase(), flavor);
         currentOrder.addItem(drink);
     }
 
     public void addChips(){
-        Side chipsAndSalsa = new Side(1.5);
+        Side chipsAndSalsa = new Side("Chips and Salsa");
         currentOrder.addItem(chipsAndSalsa);
     }
 
@@ -197,12 +199,12 @@ public class UserInterface {
             String choice = getInput("Select an option: ");
 
             return switch (choice){
-                case "1" -> "carne asada";
-                case "2" -> "al pastor";
-                case "3" -> "carnitas";
-                case "4" -> "pollo";
-                case "5" -> "chorizo";
-                case "6" -> "pescado";
+                case "1" -> "Carne Asada";
+                case "2" -> "Al Pastor";
+                case "3" -> "Carnitas";
+                case "4" -> "Pollo";
+                case "5" -> "Chorizo";
+                case "6" -> "Pescado";
                 case "7" -> "";
                 default -> "NO MEAT";
             };
@@ -220,10 +222,10 @@ public class UserInterface {
             String choice = getInput("Select an option: ");
 
             return switch (choice){
-                case "1" -> "queso fresco";
-                case "2" ->"oaxaca";
-                case "3" -> "cotija";
-                case "4" -> "cheddar";
+                case "1" -> "Queso Fresco";
+                case "2" ->"Oaxaca";
+                case "3" -> "Cotija";
+                case "4" -> "Cheddar";
                 case "5" -> "";
                 default -> "NO CHEESE";
             };
@@ -246,15 +248,15 @@ public class UserInterface {
             String choice = getInput("Select an option: ");
 
             return switch (choice){
-                case "1" -> "lettuce";
-                case "2" -> "cilantro";
-                case "3" -> "onions";
-                case "4" -> "tomatoes";
-                case "5" -> "jalepenos";
-                case "6" -> "radishes";
-                case "7" -> "pico de gallo";
-                case "8" -> "guacamole";
-                case "9" -> "corn";
+                case "1" -> "Lettuce";
+                case "2" -> "Cilantro";
+                case "3" -> "Onions";
+                case "4" -> "Tomatoes";
+                case "5" -> "Jalepenos";
+                case "6" -> "Radishes";
+                case "7" -> "Pico de Gallo";
+                case "8" -> "Guacamole";
+                case "9" -> "Corn";
                 case "0" -> "";
                 default -> "NO REG TOPPINGS";
             };
@@ -273,12 +275,12 @@ public class UserInterface {
             String choice = getInput("Select an option: ");
 
             return switch (choice) {
-                case "1" -> "salsa verde";
-                case "2" -> "salsa rojo";
-                case "3" -> "chipotle";
-                case "4" -> "habanero";
-                case "5" -> "mild";
-                case "6" -> "extra hot";
+                case "1" -> "Salsa Verde";
+                case "2" -> "Salsa Rojo";
+                case "3" -> "Chipotle";
+                case "4" -> "Habanero";
+                case "5" -> "Mild";
+                case "6" -> "Extra Hot";
                 default -> "NO SAUCE";
             };
     }
