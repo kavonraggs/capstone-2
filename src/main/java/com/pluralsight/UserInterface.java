@@ -78,13 +78,35 @@ public class UserInterface {
             toppingMenu();
             String choice = getInput("Select corresponding number: ");
 
+            Topping topping = null;
             switch (choice) {
-                case "1" -> taco.addTopping(new Topping(meatMenu(), "meat"));
-                case "2" -> taco.addTopping(new Topping(cheeseMenu(), "cheese"));
-                case "3" -> taco.addTopping(new Topping(regularToppingMenu(), "regular"));
-                case "4" -> taco.addTopping(new Topping(sauceMenu(), "sauce"));
+                case "1" -> {
+                    String meat = meatMenu();
+                    if (!meat.isBlank()) topping = new Topping(meat, "meat");
+                    taco.addTopping(new Topping(meat, "meat"));
+                }
+                case "2" -> {
+                    String cheese = cheeseMenu();
+                    if (!cheese.isBlank()) topping = new Topping(cheese, "cheese");
+                }
+                case "3" -> {
+                    String regular = regularToppingMenu();
+                    if (!regular.isBlank()) topping = new Topping(regular, "regular");
+                }
+                case "4" -> {
+                    String sauce = sauceMenu();
+                    if (!sauce.isBlank()) topping = new Topping(sauce, "sauce");
+                }
                 case "0" -> adding = false;
                 default -> System.out.println("Invalid choice, try again.");
+            }
+            if (topping != null) {
+                String extraChoice = getInput("Would you like extra " + topping.getName() + "? (Y/N)");
+                if (extraChoice.equalsIgnoreCase("y")){
+                    topping.setExtra(true);
+                }
+                taco.addTopping(topping);
+
             }
         }
     }
@@ -237,7 +259,7 @@ public class UserInterface {
                     2) Cilantro
                     3) Onions
                     4) Tomatoes
-                    5) Jalepenos
+                    5) Jalapenos
                     6) Radishes
                     7) Pico de Gallo
                     8) Guacamole
@@ -252,7 +274,7 @@ public class UserInterface {
                 case "2" -> "Cilantro";
                 case "3" -> "Onions";
                 case "4" -> "Tomatoes";
-                case "5" -> "Jalepenos";
+                case "5" -> "Jalapenos";
                 case "6" -> "Radishes";
                 case "7" -> "Pico de Gallo";
                 case "8" -> "Guacamole";
@@ -265,7 +287,7 @@ public class UserInterface {
     public String sauceMenu() {
             String menu = """
                     1) Salsa Verde
-                    2) Salsa Rojo
+                    2) Salsa Roja
                     3) Chipotle
                     4) Habanero
                     5) Mild
@@ -276,7 +298,7 @@ public class UserInterface {
 
             return switch (choice) {
                 case "1" -> "Salsa Verde";
-                case "2" -> "Salsa Rojo";
+                case "2" -> "Salsa Roja";
                 case "3" -> "Chipotle";
                 case "4" -> "Habanero";
                 case "5" -> "Mild";

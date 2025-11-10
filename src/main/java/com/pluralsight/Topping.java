@@ -16,14 +16,14 @@ public class Topping {
 
         switch (category.toLowerCase()){
             case "meat" -> {
-                switch (size.toLowerCase()){
+                switch (size){
                     case "Single" -> price = 1 + (extra ? 0.5 : 0);
                     case "3 tacos" -> price = 2 + (extra ? 1 : 0);
                     case "Burrito" -> price = 3 + (extra ? 1.50 : 0);
                 }
             }
             case "cheese" -> {
-                switch (size.toLowerCase()){
+                switch (size){
                     case "Single" -> price = 0.75 + (extra ? 0.30 : 0);
                     case "3 tacos" -> price = 1.50 + (extra ? 0.60 : 0);
                     case "Burrito" -> price = 2.25 + (extra ? 0.90 : 0);
@@ -40,6 +40,10 @@ public class Topping {
 
     public String getName() {
         return name;
+    }
+
+    public void setExtra(boolean extra) {
+        this.extra = extra;
     }
 
     @Override
