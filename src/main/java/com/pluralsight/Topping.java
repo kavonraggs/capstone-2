@@ -48,6 +48,6 @@ public class Topping {
 
     @Override
     public String toString() {
-        return String.format("%s %s", name, extra ? "(%s)": "");
+        return String.format("%s %s", name, extra ? "(%s)": "", extra);
     }
 }

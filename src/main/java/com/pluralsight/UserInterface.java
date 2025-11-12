@@ -101,7 +101,7 @@ public class UserInterface {
                 default -> System.out.println("Invalid choice, try again.");
             }
             if (topping != null) {
-                String extraChoice = getInput("Would you like extra " + topping.getName() + "? (Y/N)");
+                String extraChoice = getInput("Would you like extra " + topping.getName() + "? (Y/N) ");
                 if (extraChoice.equalsIgnoreCase("y")){
                     topping.setExtra(true);
                 }
@@ -133,7 +133,7 @@ public class UserInterface {
             tacoShellMenu();
         }
 
-        String deepFried = getInput("Deep fried? (Y/N)");
+        String deepFried = getInput("Deep fried? (Y/N) ");
         boolean isFried;
         isFried = deepFried.equalsIgnoreCase("Y");
 
