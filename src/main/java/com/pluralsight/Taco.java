@@ -3,7 +3,7 @@ package com.pluralsight;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Taco extends Food{
+public class Taco extends Food {
     private String size;
     private String shellType;
     private boolean deepFried;
@@ -16,8 +16,10 @@ public class Taco extends Food{
         this.deepFried = deepFried;
     }
 
-    public void addTopping(Topping t){
-        toppings.add(t);
+    public void addTopping(Topping t) {
+        if (t != null){
+            toppings.add(t);
+        }
     }
 
     public String getSize() {
@@ -45,15 +47,15 @@ public class Taco extends Food{
     public double getPrice() {
         double price = 0;
 
-        switch (size.toLowerCase()){
+        switch (size.toLowerCase()) {
             case "single" -> price = 3.5;
             case "3 tacos" -> price = 9.0;
             case "burrito" -> price = 8.50;
         }
-        for (Topping t: toppings){
+        for (Topping t : toppings) {
             price += t.getPrice(t.getCategory(), size);
         }
-        if (deepFried){
+        if (deepFried) {
             price += 1;
         }
         return price;
@@ -64,21 +66,18 @@ public class Taco extends Food{
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%s (%s)\n", getName(), getSize()));
         sb.append(String.format(" -Shell Type: %s\n", getShellType()));
-        sb.append(String.format(" - Deep Fried: %s\n", isDeepFried()));
+        sb.append(String.format(" - Deep Fried: %s\n", isDeepFried() ? "Yes": "No"));
         sb.append(" - Toppings:\n");
 
-        if (toppings.isEmpty()){
+        if (toppings.isEmpty()) {
             sb.append(" (no toppings)\n");
         } else {
-            for (Topping t: toppings){
+            for (Topping t : toppings) {
                 sb.append(String.format(" -%s", t.getName()));
             }
         }
-        sb.append(String.format(" @ $%.2f", getPrice()));
-
-        return "Taco (" + size + ")" +
-                "\n - Deep Fried: " + deepFried +
-                "\n - Toppings: " + toppings + "@ $" + getPrice();
-
+        sb.append(String.format("Total: $%.2f", getPrice()));
+        return sb.toString();
     }
+
 }

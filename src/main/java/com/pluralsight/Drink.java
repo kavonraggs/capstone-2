@@ -14,9 +14,10 @@ public class Drink extends Food {
     public double getPrice() { double price = 0;
 
         switch (size.toUpperCase()) {
-            case "S" -> price = 2.00;
-            case "M" -> price = 2.50;
-            case "L" -> price = 3.00;
+            case "S", "SMALL" -> price = 2.00;
+            case "M", "MEDIUM" -> price = 2.50;
+            case "L", "LARGE" -> price = 3.00;
+            default -> price = 0.0;
         }
         return price;
     }

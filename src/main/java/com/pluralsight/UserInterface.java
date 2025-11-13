@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     Order currentOrder = new Order();
+    String shellType = "flour";
 
 
     public void placeOrder(){
@@ -83,7 +84,6 @@ public class UserInterface {
                 case "1" -> {
                     String meat = meatMenu();
                     if (!meat.isBlank()) topping = new Topping(meat, "meat");
-                    taco.addTopping(new Topping(meat, "meat"));
                 }
                 case "2" -> {
                     String cheese = cheeseMenu();
@@ -115,7 +115,6 @@ public class UserInterface {
 
     public Taco createTaco(){
         String name;
-        String shellType = "flour";
         sizeMenu();
         String size = getInput("Select an option: ");
 
@@ -130,12 +129,11 @@ public class UserInterface {
             name = "Burrito";
         } else {
             name = "Taco";
-            tacoShellMenu();
+            shellType = tacoShellMenu();
         }
 
         String deepFried = getInput("Deep fried? (Y/N) ");
-        boolean isFried;
-        isFried = deepFried.equalsIgnoreCase("Y");
+        boolean isFried = deepFried.equalsIgnoreCase("Y");
 
         return new Taco(name, size, shellType, isFried);
     }
@@ -173,7 +171,25 @@ public class UserInterface {
     }
 
     public void checkout(){
-        System.out.println(currentOrder);
+
+        String checkoutMenu = """
+                1) Confirm Order
+                2) Edit Order
+                0) Cancel
+                """;
+        System.out.println(checkoutMenu);
+        String choice = getInput("Select corresponding number: ");
+
+        switch (choice){
+            case "1":
+                System.out.println(currentOrder);
+                currentOrder.saveReceipt();
+                return;
+            case "2": editOrder();
+        }
+
+
+
     }
 
     public void sizeMenu(){
@@ -185,7 +201,23 @@ public class UserInterface {
         System.out.println(menu);
     }
 
-    public void tacoShellMenu(){
+    public void editOrder(){
+        System.out.println("""
+                1) Add item
+                2) Remove item
+                
+                "Would you like to add or remove an item?"
+                """);
+        String choice = getInput("Select corresponding number: ");
+
+        switch (choice){
+            case "1": showMenu();
+            case "2": removeItem();
+        }
+    }
+
+    public String tacoShellMenu(){
+
         String menu = """
                 1) Corn
                 2) Flour
@@ -193,6 +225,21 @@ public class UserInterface {
                 4) Bowl
                 """;
         System.out.println(menu);
+
+        String choice = getInput("Select corresponding number: ");
+
+        return switch (choice){
+            case "1" -> shellType = "corn";
+            case "3" -> shellType = "hard shell";
+            case "4" -> shellType = "bowl";
+            default -> shellType = "flour";
+        };
+    }
+
+    public void removeItem(){
+        for (Food item:  ){
+
+        }
     }
 
     public void toppingMenu(){

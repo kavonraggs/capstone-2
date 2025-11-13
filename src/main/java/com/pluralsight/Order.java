@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,6 +20,10 @@ public class Order {
 
     public void addItem(Food item){
         items.add(item);
+    }
+
+    public List<Food> getItems() {
+        return items;
     }
 
     public double getTotal(){
@@ -40,6 +47,29 @@ public class Order {
         receipt.append("---------------------------------\n");
         receipt.append(String.format("Total: $%.2f\n", getTotal()));
         return receipt.toString();
+    }
+
+    public void saveReceipt(){
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+        DateTimeFormatter displayReceipt = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+        String fileName = "receipts/" + orderTime.format(fmt) + ".csv";
+
+        try(BufferedWriter buffWrite = new BufferedWriter(new FileWriter(fileName
+        ))){
+            buffWrite.write("Date,Item,Description,Price\n");
+
+            for (Food item: items){
+                buffWrite.write(String.format("%s,%s,%s,%.2f\n", orderTime.format(displayReceipt), item.getClass().getSimpleName(), item.getName(), item.getPrice()));
+            }
+
+            buffWrite.write(String.format(",,Total,%.2f\n", getTotal()));
+            System.out.println("Receipt saved - " + fileName);
+
+        } catch (IOException e){
+            System.out.println("Error saving receipt");
+
+        }
+
     }
 
     @Override
