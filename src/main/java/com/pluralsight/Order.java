@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -52,7 +53,21 @@ public class Order {
     public void saveReceipt(){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         DateTimeFormatter displayReceipt = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
-        String fileName = "receipts/" + orderTime.format(fmt) + ".csv";
+        String folderName = "receipts";
+        String fileName = folderName + "/" + orderTime.format(fmt) + ".csv";
+
+        File folder = new File(folderName);
+
+        if (!folder.exists()){
+            boolean fileCreated = folder.mkdir();
+
+            if (fileCreated){
+                System.out.println("Folder created");
+            }else {
+                System.out.println("Error creating file");
+                return;
+            }
+        }
 
         try(BufferedWriter buffWrite = new BufferedWriter(new FileWriter(fileName
         ))){
