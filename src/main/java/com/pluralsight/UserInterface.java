@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -20,7 +21,6 @@ public class UserInterface {
                 default -> System.out.println("Error, try again");
                 }
             }
-
         }
 
     public void startMenu(){
@@ -31,7 +31,6 @@ public class UserInterface {
         System.out.println(startMenu);
     }
 
-
     public void showMenu() {
         boolean ordering = true;
 
@@ -41,6 +40,7 @@ public class UserInterface {
                     2) Add Drink
                     3) Add Chips & Salsa
                     4) Checkout
+                    5) View Order
                     0) Cancel order
                     """;
             System.out.println(orderScreen);
@@ -51,9 +51,9 @@ public class UserInterface {
                 case "2" -> addDrink();
                 case "3" -> addChips();
                 case "4" -> checkout();
+                case "5" -> System.out.println(currentOrder.getReceipt());
                 case "0" -> ordering = false;
                 default -> System.out.println("Error, try again.");
-
             }
         }
     }
@@ -66,7 +66,7 @@ public class UserInterface {
                  System.out.println("Customizing taco #" + i);
                  selectToppings(taco);
              }
-         }else {
+         } else {
              selectToppings(taco);
          }
              currentOrder.addItem(taco);
@@ -171,21 +171,27 @@ public class UserInterface {
     }
 
     public void checkout(){
+        System.out.println(currentOrder);
 
         String checkoutMenu = """
                 1) Confirm Order
                 2) Edit Order
                 0) Cancel
                 """;
+
         System.out.println(checkoutMenu);
         String choice = getInput("Select corresponding number: ");
 
         switch (choice){
-            case "1":
+            case "1" -> {
                 System.out.println(currentOrder);
                 currentOrder.saveReceipt();
                 return;
-            case "2": editOrder();
+            }
+            case "2" -> editOrder();
+            case "3" -> {
+                return;
+            }
         }
 
 
@@ -206,13 +212,14 @@ public class UserInterface {
                 1) Add item
                 2) Remove item
                 
-                "Would you like to add or remove an item?"
+                Would you like to add or remove an item?
                 """);
         String choice = getInput("Select corresponding number: ");
 
         switch (choice){
-            case "1": showMenu();
-            case "2": removeItem();
+            case "1" -> showMenu();
+            case "2" -> removeItem();
+            default -> System.out.println("Invalid choice");
         }
     }
 
@@ -237,8 +244,42 @@ public class UserInterface {
     }
 
     public void removeItem(){
-        for (Food item:  ){
+        List<Food> items = currentOrder.getItems();
 
+        if (items.isEmpty()){
+            System.out.println("There are no items to remove");
+            return;
+        }
+
+        System.out.println("Current items: ");
+        System.out.println("---------------------------------");
+
+        for (int i = 0; i < items.size(); i++) {
+            System.out.printf("%d) %s", i + 1, items.get(i));
+        }
+
+        System.out.println("---------------------------------");
+        String input = getInput("Enter corresponding number: ");
+
+        int choice = Integer.parseInt(input);
+
+        if (choice == 0){
+            System.out.println("No items removed from order");
+            return;
+        }
+        if (choice < 1 || choice > items.size()){
+            System.out.println("Invalid, please select again");
+            return;
+        }
+
+        Food itemRemoved = items.get(choice - 1);
+        String removeConfirmation = getInput("Are you sure you want to remove " + itemRemoved.getName() + "? (Y/N) ");
+
+        if (removeConfirmation.equalsIgnoreCase("y")){
+            items.remove(choice - 1);
+            System.out.println(itemRemoved.getName() + " has been removed from your order. ");
+        } else {
+            System.out.println("Item not removed.");
         }
     }
 
