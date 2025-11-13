@@ -117,7 +117,7 @@ public class UserInterface {
         String name;
         String shellType = "flour";
         sizeMenu();
-        String size = getInput("Select an option:");
+        String size = getInput("Select an option: ");
 
         switch (size) {
             case "2" -> size = "3 tacos";
@@ -148,7 +148,7 @@ public class UserInterface {
                 L) Large
                 """;
         System.out.println(drinkMenu);
-        String size = getInput("What size drink would you like? (S / M / L)");
+        String size = getInput("What size drink would you like? (S / M / L) ");
 
         String flavorMenu = """
                 1) Strawberry
