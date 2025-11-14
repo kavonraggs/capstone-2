@@ -71,20 +71,18 @@ public class Order {
 
         try(BufferedWriter buffWrite = new BufferedWriter(new FileWriter(fileName
         ))){
-            buffWrite.write("Date | Item | Description | Price\n");
+            buffWrite.write(getReceipt());
 
-            for (Food item: items){
-                buffWrite.write(String.format("%s | %s | %s | %.2f\n", orderTime.format(displayReceipt), item.getClass().getSimpleName(), item.getName(), item.getPrice()));
-            }
-
-            buffWrite.write(String.format("Total: %.2f\n", getTotal()));
+//            for (Food item: items){
+//                buffWrite.write(String.format("%s | %s | %s | %.2f\n", orderTime.format(displayReceipt), item.getClass().getSimpleName(), item.getName(), item.getPrice()));
+//            }
+//
+//            buffWrite.write(String.format("Total: %.2f\n", getTotal()));
             System.out.println("Receipt saved - " + fileName);
 
         } catch (IOException e){
             System.out.println("Error saving receipt");
-
         }
-
     }
 
     @Override

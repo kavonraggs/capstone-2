@@ -73,7 +73,7 @@ public class Taco extends Food {
             sb.append(" (no toppings)\n");
         } else {
             for (Topping t : toppings) {
-                sb.append(String.format(" -%s\n", t.getName()));
+                sb.append(String.format("%s %s", t.getName(), t.isExtra() ? " (extra)": ""));
             }
         }
         sb.append(String.format("Total: $%.2f", getPrice()));

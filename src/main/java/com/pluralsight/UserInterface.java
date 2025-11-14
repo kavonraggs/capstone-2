@@ -106,7 +106,6 @@ public class UserInterface {
                     topping.setExtra(true);
                 }
                 taco.addTopping(topping);
-
             }
         }
     }

@@ -42,12 +42,16 @@ public class Topping {
         return name;
     }
 
+    public boolean isExtra() {
+        return extra;
+    }
+
     public void setExtra(boolean extra) {
         this.extra = extra;
     }
 
     @Override
     public String toString() {
-        return String.format("%s %s", name, extra ? " (extra)": "");
+        return String.format("%s %s\n", name, extra ? "(extra) ": "");
     }
 }
