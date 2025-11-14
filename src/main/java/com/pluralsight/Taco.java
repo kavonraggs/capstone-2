@@ -76,7 +76,7 @@ public class Taco extends Food {
                 sb.append(String.format("%s %s", t.getName(), t.isExtra() ? " (extra)": ""));
             }
         }
-        sb.append(String.format("Total: $%.2f", getPrice()));
+        sb.append(String.format("\nTotal: $%.2f", getPrice()));
         return sb.toString();
     }
 

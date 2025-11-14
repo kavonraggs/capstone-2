@@ -110,8 +110,6 @@ public class UserInterface {
         }
     }
 
-
-
     public Taco createTaco(){
         String name;
         sizeMenu();
@@ -122,7 +120,6 @@ public class UserInterface {
             case "3" -> size = "Burrito";
             default -> size = "Single";
         }
-
 
         if (size.equalsIgnoreCase("burrito")){
             name = "Burrito";
@@ -161,12 +158,14 @@ public class UserInterface {
            case "3" -> flavor = "Lemon";
        }
         Drink drink = new Drink("Drink", size.toLowerCase(), flavor);
+        System.out.println("Drink added to order!");
         currentOrder.addItem(drink);
     }
 
     public void addChips(){
         Side chipsAndSalsa = new Side("Chips and Salsa");
         currentOrder.addItem(chipsAndSalsa);
+        System.out.println("Chips and salsa added to order!");
     }
 
     public void checkout(){
@@ -192,9 +191,6 @@ public class UserInterface {
                 return;
             }
         }
-
-
-
     }
 
     public void sizeMenu(){
@@ -398,6 +394,5 @@ public class UserInterface {
         Scanner scanner = new Scanner(System.in);
         System.out.print(prompt);
         return scanner.nextLine();
-
     }
 }
