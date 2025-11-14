@@ -54,7 +54,7 @@ public class Order {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         DateTimeFormatter displayReceipt = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
         String folderName = "receipts";
-        String fileName = folderName + "/" + orderTime.format(fmt) + ".csv";
+        String fileName = folderName + "/" + orderTime.format(fmt) + ".txt";
 
         File folder = new File(folderName);
 
@@ -63,7 +63,7 @@ public class Order {
 
             if (fileCreated){
                 System.out.println("Folder created");
-            }else {
+            } else {
                 System.out.println("Error creating file");
                 return;
             }
@@ -71,13 +71,13 @@ public class Order {
 
         try(BufferedWriter buffWrite = new BufferedWriter(new FileWriter(fileName
         ))){
-            buffWrite.write("Date,Item,Description,Price\n");
+            buffWrite.write("Date | Item | Description | Price\n");
 
             for (Food item: items){
-                buffWrite.write(String.format("%s,%s,%s,%.2f\n", orderTime.format(displayReceipt), item.getClass().getSimpleName(), item.getName(), item.getPrice()));
+                buffWrite.write(String.format("%s | %s | %s | %.2f\n", orderTime.format(displayReceipt), item.getClass().getSimpleName(), item.getName(), item.getPrice()));
             }
 
-            buffWrite.write(String.format(",,Total,%.2f\n", getTotal()));
+            buffWrite.write(String.format("Total: %.2f\n", getTotal()));
             System.out.println("Receipt saved - " + fileName);
 
         } catch (IOException e){
